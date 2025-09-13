@@ -22,7 +22,7 @@ jobs:
 
       - name: Change Key
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
           FILE_PATH: "A7xDev_Key.lua"
           KEY_LINE: "8"
         run: |
