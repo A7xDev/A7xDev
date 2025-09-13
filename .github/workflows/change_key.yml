@@ -38,8 +38,8 @@ jobs:
           file_path = os.environ["FILE_PATH"]
           key_line_number = int(os.environ["KEY_LINE"]) - 1  # index
 
-          # توليد مفتاح جديد
-          new_key = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+          # توليد مفتاح جديد: "A7x" + 5 أرقام عشوائية
+          new_key = "A7x" + ''.join(random.choices(string.digits, k=5))
 
           # جلب الملف الحالي
           url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
