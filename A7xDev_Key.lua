@@ -5,7 +5,7 @@ local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 --// المفتاح الصحيح
-local correctKey = "A7xkey"
+local correctKey = "6ePXFQuEbq"
 
 --// إنشاء الواجهة
 local ScreenGui = Instance.new("ScreenGui")
