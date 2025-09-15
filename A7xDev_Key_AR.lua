@@ -120,7 +120,7 @@ end)
 VerifyButton.MouseButton1Click:Connect(function()
     if TextBox.Text == correctKey then
         ScreenGui.Enabled = false
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/A7xDev/A7xDev/refs/heads/main/A7xDev.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/A7xDev/A7xDev/refs/heads/main/A7xDev_AR.lua"))()
     else
         -- إنشاء رسالة الخطأ
         local ErrorLabel = Instance.new("TextLabel")
