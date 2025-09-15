@@ -8,6 +8,44 @@ local Camera = workspace.CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
 local CoreGui = game:GetService("CoreGui")
 
+-- Noclip دائم وفعال
+local function noclipCharacter(character)
+    -- لكل جزء موجود بالفعل
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+
+    -- لكل جزء جديد يُضاف أثناء اللعب
+    character.DescendantAdded:Connect(function(part)
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end)
+
+    -- حل دائم: نستخدم Stepped لتأكيد CanCollide باستمرار
+    RunService.Stepped:Connect(function()
+        if character and character.Parent then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+-- تطبيق مباشر على الشخصية الحالية
+if LocalPlayer.Character then
+    noclipCharacter(LocalPlayer.Character)
+end
+
+-- تطبيق عند ظهور أي شخصية جديدة
+LocalPlayer.CharacterAdded:Connect(function(char)
+    noclipCharacter(char)
+end)
+
 --// GUI Setup
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "A7xDev_GUI"
@@ -517,3 +555,4 @@ Players.PlayerRemoving:Connect(function(pl)
 end)
 
 -- end of merged script
+
