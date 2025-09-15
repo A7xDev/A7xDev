@@ -8,6 +8,44 @@ local Camera = workspace.CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
 local CoreGui = game:GetService("CoreGui")
 
+-- Noclip دائم وفعال
+local function noclipCharacter(character)
+    -- لكل جزء موجود بالفعل
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+
+    -- لكل جزء جديد يُضاف أثناء اللعب
+    character.DescendantAdded:Connect(function(part)
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end)
+
+    -- حل دائم: نستخدم Stepped لتأكيد CanCollide باستمرار
+    RunService.Stepped:Connect(function()
+        if character and character.Parent then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end
+    end)
+end
+
+-- تطبيق مباشر على الشخصية الحالية
+if LocalPlayer.Character then
+    noclipCharacter(LocalPlayer.Character)
+end
+
+-- تطبيق عند ظهور أي شخصية جديدة
+LocalPlayer.CharacterAdded:Connect(function(char)
+    noclipCharacter(char)
+end)
+
 --// GUI Setup
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "A7xDev_GUI"
@@ -37,7 +75,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,0,0,30)
 Title.Position = UDim2.new(0,0,0,0)
 Title.BackgroundTransparency = 1
-Title.Text = "A7xDev"
+Title.Text = "A7xDev U1"
 Title.TextColor3 = Color3.fromRGB(200,120,255)
 Title.Font = Enum.Font.SourceSansBold
 Title.TextSize = 18
@@ -48,7 +86,7 @@ local ESPButton = Instance.new("TextButton")
 ESPButton.Size = UDim2.new(0,200,0,40)
 ESPButton.Position = UDim2.new(0,10,0,40)
 ESPButton.BackgroundColor3 = Color3.fromRGB(120,45,200)
-ESPButton.Text = "ESP Player 👁️"
+ESPButton.Text = "ESP Player👁️"
 ESPButton.TextColor3 = Color3.fromRGB(255,255,255)
 ESPButton.Font = Enum.Font.SourceSans
 ESPButton.TextSize = 16
@@ -93,7 +131,7 @@ SpeedBox.Size = UDim2.new(0,50,0,40)
 SpeedBox.Position = UDim2.new(0,220,0,140)
 SpeedBox.BackgroundColor3 = Color3.fromRGB(50,50,50)
 SpeedBox.TextColor3 = Color3.fromRGB(255,255,255)
-SpeedBox.Text = "16"
+SpeedBox.Text = "30"
 SpeedBox.Font = Enum.Font.SourceSans
 SpeedBox.TextSize = 16
 SpeedBox.ClearTextOnFocus = false
@@ -135,7 +173,7 @@ local ItemsTitle = Instance.new("TextLabel")
 ItemsTitle.Size = UDim2.new(1,0,0,25)
 ItemsTitle.Position = UDim2.new(0,0,0,0)
 ItemsTitle.BackgroundTransparency = 1
-ItemsTitle.Text = "Delete ❌"
+ItemsTitle.Text = "Delete❌"
 ItemsTitle.TextColor3 = Color3.fromRGB(255,100,100)
 ItemsTitle.Font = Enum.Font.SourceSansBold
 ItemsTitle.TextSize = 16
@@ -349,7 +387,7 @@ end)
 local SpeedEnabled = false
 SpeedButton.MouseButton1Click:Connect(function()
     SpeedEnabled = not SpeedEnabled
-    SpeedButton.Text = SpeedEnabled and "Stop Player Speed 🏃‍♂️" or "Player Speed 🏃‍♂️"
+    SpeedButton.Text = SpeedEnabled and "Stop Player Speed" or "Player Speed🏃‍♂️"
 end)
 
 task.spawn(function()
@@ -401,7 +439,7 @@ end)
 -- Toggle Aim from main UI button
 AimButton.MouseButton1Click:Connect(function()
     AimEnabled = not AimEnabled
-    AimButton.Text = AimEnabled and "Stop Aimbot 🎯" or "Aimbot 🎯"
+    AimButton.Text = AimEnabled and "Stop Aimbot" or "Aimbot"
     -- do not clear CurrentTarget here (per request)
 end)
 
