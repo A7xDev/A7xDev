@@ -5,7 +5,7 @@ local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 --// Correct Key
-local correctKey = "A7x40500"
+local correctKey = "A7x90137"
 
 --// Create GUI
 local ScreenGui = Instance.new("ScreenGui")
