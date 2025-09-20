@@ -15,7 +15,7 @@ getgenv().SelectedWeapons = getgenv().SelectedWeapons or {}
 getgenv().SearchActive = getgenv().SearchActive or false
 
 queue_on_teleport([[
-    loadstring(game:HttpGet("https://pastebin.com/raw/dmzZRx4j"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/A7xDev/A7xDev/refs/heads/main/A7xFinder.lua"))()
 ]])
 
 -- ===== واجهة البحث =====
