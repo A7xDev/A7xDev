@@ -254,7 +254,7 @@ function teleportToNewServer()
     if #servers>0 then
         local targetServer = servers[math.random(1,#servers)]
         queue_on_teleport([[
-            loadstring(game:HttpGet("https://pastebin.com/raw/dmzZRx4j"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/A7xDev/A7xDev/refs/heads/main/A7xFinder.lua"))()
         ]])
         TeleportService:TeleportToPlaceInstance(PLACE_ID,targetServer,LocalPlayer)
     else
